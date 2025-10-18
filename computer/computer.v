@@ -1,0 +1,92 @@
+`include "cpu.v"
+`include "memory.v"
+`timescale 1ns/1ps
+
+module computer(    input wire Clk,
+                    input wire Reset,
+                    input reg [7:0] port_in_00,
+                    input reg [7:0] port_in_01,
+                    input reg [7:0] port_in_02,
+                    input reg [7:0] port_in_03,
+                    input reg [7:0] port_in_04,
+                    input reg [7:0] port_in_05,
+                    input reg [7:0] port_in_06,
+                    input reg [7:0] port_in_07,
+                    input reg [7:0] port_in_08,
+                    input reg [7:0] port_in_09,
+                    input reg [7:0] port_in_10,
+                    input reg [7:0] port_in_11,
+                    input reg [7:0] port_in_12,
+                    input reg [7:0] port_in_13,
+                    input reg [7:0] port_in_14,
+                    input reg [7:0] port_in_15,
+                    output reg [7:0] port_out_00,
+                    output reg [7:0] port_out_01,
+                    output reg [7:0] port_out_02,
+                    output reg [7:0] port_out_03,
+                    output reg [7:0] port_out_04,
+                    output reg [7:0] port_out_05,
+                    output reg [7:0] port_out_06,
+                    output reg [7:0] port_out_07,
+                    output reg [7:0] port_out_08,
+                    output reg [7:0] port_out_09,
+                    output reg [7:0] port_out_10,
+                    output reg [7:0] port_out_11,
+                    output reg [7:0] port_out_12,
+                    output reg [7:0] port_out_13,
+                    output reg [7:0] port_out_14,
+                    output reg [7:0] port_out_15
+);
+    wire write;
+    wire [7:0] address, to_memory_data_in, from_memory_data_out;
+
+    cpu cpu_inst( .Clk(Clk),
+                  .Reset(Reset),
+                  .write(write),
+                  .address(address),
+                  .to_memory(to_memory_data_in),
+                  .from_memory(from_memory_data_out)
+                );
+    
+    memory memory_inst( .clk(Clk),
+                        .reset(Reset),
+                        .write(write),
+                        .address(address),
+                        .data_in(to_memory_data_in),
+                        .data_out(from_memory_data_out),
+                        .port_in_00(port_in_00),
+                        .port_in_01(port_in_01),
+                        .port_in_02(port_in_02),
+                        .port_in_03(port_in_03),
+                        .port_in_04(port_in_04),
+                        .port_in_05(port_in_05),
+                        .port_in_06(port_in_06),
+                        .port_in_07(port_in_07),
+                        .port_in_08(port_in_08),
+                        .port_in_09(port_in_09),
+                        .port_in_10(port_in_10),
+                        .port_in_11(port_in_11),
+                        .port_in_12(port_in_12),
+                        .port_in_13(port_in_13),
+                        .port_in_14(port_in_14),
+                        .port_in_15(port_in_15),
+                        .port_out_00(port_out_00),
+                        .port_out_01(port_out_01),
+                        .port_out_02(port_out_02),
+                        .port_out_03(port_out_03),
+                        .port_out_04(port_out_04),
+                        .port_out_05(port_out_05),
+                        .port_out_06(port_out_06),
+                        .port_out_07(port_out_07),
+                        .port_out_08(port_out_08),
+                        .port_out_09(port_out_09),
+                        .port_out_10(port_out_10),
+                        .port_out_11(port_out_11),
+                        .port_out_12(port_out_12),
+                        .port_out_13(port_out_13),
+                        .port_out_14(port_out_14),
+                        .port_out_15(port_out_15)
+                      );
+    
+
+endmodule
